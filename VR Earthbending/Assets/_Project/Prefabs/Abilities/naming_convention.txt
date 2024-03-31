@@ -1,0 +1,6 @@
+if ability is 1 handed add _1 after ability name as shown:
+abilityname_1
+
+if 2 handed then _2 as shown:
+abilityname_2
+
