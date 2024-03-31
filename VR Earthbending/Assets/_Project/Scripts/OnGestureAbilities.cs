@@ -25,54 +25,18 @@ public class OnGestureAbilities : MonoBehaviour
     private Vector3 reticlePositionRight;
     private Vector3 reticleNormalRight;
 
-    public void DoAbility(string gestureNameAndHand)
+    // public RayInteractorGetHoveredGameObject RayInteractorGetHoveredGameObjectRight;
+    // public RayInteractorGetHoveredGameObject RayInteractorGetHoveredGameObjectLeft;
+
+    private void Update()
     {
-        //if two hand ability is used
-        if (gestureNameAndHand.Contains("Both|"))
-        {
-            // Split the input string by '|'
-            string[] parts = gestureNameAndHand.Split('|');
+        // Debug.Log(RayInteractorGetHoveredGameObject.interactableObject);
+    }
 
-            // Initialize variables to store the extracted values
-            string leftGesture = "";
-            string rightGesture = "";
-
-            // Loop through each part of the split string
-            foreach (string part in parts)
-            {
-                // Split the part by ':'
-                string[] subparts = part.Split(':');
-
-                // Check if the split resulted in two parts
-                if (subparts.Length == 2)
-                {
-                    // Check if it's the Left or Right value
-                    if (subparts[0] == "Left")
-                    {
-                        // Extract the Left value
-                        leftGesture = subparts[1];
-                    }
-                    else if (subparts[0] == "Right")
-                    {
-                        // Extract the Right value
-                        rightGesture = subparts[1];
-                    }
-                }
-            }
-
-            // add underscore instead of whitespace
-            leftGesture = ReplaceWhiteSpaceWithUnderscore(leftGesture);
-            rightGesture = ReplaceWhiteSpaceWithUnderscore(rightGesture);
-
-            // Debug.Log("leftGesture: " + leftGesture);
-            // Debug.Log("rightGesture: " + rightGesture);
-
-            //generate ability
-            GenerateAbility(leftGesture: leftGesture, rightGesture: rightGesture);
-
-        }
-        //if one hand ability is used
-        else
+    private void DoAbility(string gestureNameAndHand)
+    {
+        //if gesture is made while rayhover interacting with object
+        if (gestureNameAndHand.Contains("RayHover|"))
         {
             // Debug.Log(gestureNameAndHand);
 
@@ -80,19 +44,80 @@ public class OnGestureAbilities : MonoBehaviour
 
             string handUsed = gestureNameAndHandSplitted[0]; // Get the string before last colon
             string gestureName = gestureNameAndHandSplitted[1]; // Get the string after last colon
-            // Debug.Log(handUsed + ": " + gestureName);
 
-            gestureName = ReplaceWhiteSpaceWithUnderscore(gestureName);
 
-            if (handUsed == "Right")
+        }
+        //if gesture is made without rayhover interacting with object
+        else
+        {
+            //if two hand ability is used
+            if (gestureNameAndHand.Contains("Both|"))
             {
-                GenerateAbility(leftGesture: null, rightGesture: gestureName);
+                // Split the input string by '|'
+                string[] parts = gestureNameAndHand.Split('|');
+
+                // Initialize variables to store the extracted values
+                string leftGesture = "";
+                string rightGesture = "";
+
+                // Loop through each part of the split string
+                foreach (string part in parts)
+                {
+                    // Split the part by ':'
+                    string[] subparts = part.Split(':');
+
+                    // Check if the split resulted in two parts
+                    if (subparts.Length == 2)
+                    {
+                        // Check if it's the Left or Right value
+                        if (subparts[0] == "Left")
+                        {
+                            // Extract the Left value
+                            leftGesture = subparts[1];
+                        }
+                        else if (subparts[0] == "Right")
+                        {
+                            // Extract the Right value
+                            rightGesture = subparts[1];
+                        }
+                    }
+                }
+
+                // add underscore instead of whitespace
+                leftGesture = ReplaceWhiteSpaceWithUnderscore(leftGesture);
+                rightGesture = ReplaceWhiteSpaceWithUnderscore(rightGesture);
+
+                // Debug.Log("leftGesture: " + leftGesture);
+                // Debug.Log("rightGesture: " + rightGesture);
+
+                //generate ability
+                GenerateAbility(leftGesture: leftGesture, rightGesture: rightGesture);
+
             }
-            else if (handUsed == "Left")
+            //if one hand ability is used
+            else
             {
-                GenerateAbility(leftGesture: gestureName, rightGesture: null);
+                // Debug.Log(gestureNameAndHand);
+
+                string[] gestureNameAndHandSplitted = gestureNameAndHand.Split(':');
+
+                string handUsed = gestureNameAndHandSplitted[0]; // Get the string before last colon
+                string gestureName = gestureNameAndHandSplitted[1]; // Get the string after last colon
+                // Debug.Log(handUsed + ": " + gestureName);
+
+                gestureName = ReplaceWhiteSpaceWithUnderscore(gestureName);
+
+                if (handUsed == "Right")
+                {
+                    GenerateAbility(leftGesture: null, rightGesture: gestureName);
+                }
+                else if (handUsed == "Left")
+                {
+                    GenerateAbility(leftGesture: gestureName, rightGesture: null);
+                }
             }
         }
+
     }
 
     private void GenerateAbility(string leftGesture, string rightGesture)

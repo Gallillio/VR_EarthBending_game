@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveRockOnCollision : MonoBehaviour
+public class MoveAbility : MonoBehaviour
 {
     private Rigidbody rb;
     public float hitPower = 4;
@@ -10,10 +10,6 @@ public class MoveRockOnCollision : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-    }
-    private void Update()
-    {
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,6 +23,4 @@ public class MoveRockOnCollision : MonoBehaviour
             Destroy(gameObject, 4f);
         }
     }
-
-
 }

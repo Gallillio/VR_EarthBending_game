@@ -15,33 +15,35 @@ public class MovementRecognizer : MonoBehaviour
 {
     [SerializeField] private InputActionProperty rightActivate;
     [SerializeField] private InputActionProperty leftActivate;
+    private float inputTriggerThreshold = 0.1f; // trigger is pressed threshold
 
-    private float inputThreshold = 0.1f;
+    // all possible scenarios bools
     private bool isPressedRight;
     private bool isPressedLeft;
     private bool isPressedBoth;
-
     private bool isMovingRight = false;
     private bool isMovingLeft = false;
     private bool isMovingBoth = false;
 
+    //player hands to recognize gesture being created
     [SerializeField] private Transform movementSourceRight;
     [SerializeField] private Transform movementSourceLeft;
-
-    [SerializeField] private float newPositionThresholdDistance = 0.05f;
-    [SerializeField] private GameObject debugCubePrefab;
 
     /// <summary>
     /// When creating a new gesture using creationMode, make sure to do the move in the middle of the screen for most accuracy when predicting
     /// </summary>
     [SerializeField] private bool creationMode; //tells if we are trying to create a new gesture or recognize an old one
     [SerializeField] private string newGestureName;
-    private List<Gesture> trainingSet = new List<Gesture>();
+    private List<Gesture> trainingSet = new List<Gesture>(); // saved locally at: %appdata% >>> LocalLow >>> DefaultCompany >>> {Project File Name} (in my case its VR Earthbending)
+    // walahi ma faker di bete3mel eh kanet bug fix w khalas
+    [SerializeField] private float newPositionThresholdDistance = 0.05f;
+    [SerializeField] private GameObject debugCubePrefab;
 
+    // hand gesture points list
     private List<Vector3> positionListRight = new List<Vector3>();
     private List<Vector3> positionListLeft = new List<Vector3>();
 
-    [SerializeField] private float recognitionThreshold = 0.8f;
+    [SerializeField] private float recognitionThreshold = 0.8f; //accepted threshold that has to be passed for the gesture to go to OnGestureAbilities.cs to be used to generate Ability
 
     [System.Serializable]
     public class UnityStringEvent : UnityEvent<string> { };
@@ -52,6 +54,23 @@ public class MovementRecognizer : MonoBehaviour
     private bool canUseBothHandsAbilitiesRight;
     private bool canUseBothHandsAbilitiesLeft;
 
+    //ray interactor
+    [SerializeField] private XRRayInteractor RayInteractorObjectLeft;
+    [SerializeField] private XRRayInteractor RayInteractorObjectRight;
+    private XRRayInteractor rayInteractorLeft => RayInteractorObjectLeft;
+    private XRRayInteractor rayInteractorRight => RayInteractorObjectRight;
+    private Vector3 reticlePositionLeft;
+    private Vector3 reticleNormalLeft;
+    private bool isValidTargetLeft;
+    private Vector3 reticlePositionRight;
+    private Vector3 reticleNormalRight;
+    private bool isValidTargetRight;
+
+    //while ray hovering (holding) ability
+    private bool hoveringOnAbility;
+    // makes sure whatever hand is holding the object, only the other hand can interact with it 
+    private bool gestureFromLeftHand = false;
+    private bool gestureFromRightHand = false;
     void Start()
     {
         string[] gestureFiles = Directory.GetFiles(Application.persistentDataPath, "*.xml");
@@ -64,8 +83,8 @@ public class MovementRecognizer : MonoBehaviour
     void Update()
     {
         // trigger buttons bools
-        isPressedRight = rightActivate.action.ReadValue<float>() > inputThreshold;
-        isPressedLeft = leftActivate.action.ReadValue<float>() > inputThreshold;
+        isPressedRight = rightActivate.action.ReadValue<float>() > inputTriggerThreshold;
+        isPressedLeft = leftActivate.action.ReadValue<float>() > inputTriggerThreshold;
 
         //Check if both triggers are pressed at the same time
         CheckIFBothHandAbilitiesAvailable();
@@ -120,8 +139,6 @@ public class MovementRecognizer : MonoBehaviour
             UpdateMovementLeft();
         }
     }
-
-
 
     private void CheckIFBothHandAbilitiesAvailable()
     {
@@ -302,9 +319,15 @@ public class MovementRecognizer : MonoBehaviour
             Result resultRight = PointCloudRecognizer.Classify(newGestureRight, trainingSet.ToArray());
             // Debug.Log("Right Hand Result: " + resultRight.GestureClass + ": " + resultRight.Score);
 
-            if (resultRight.Score > recognitionThreshold)
+            if (resultRight.Score > recognitionThreshold && !hoveringOnAbility)
             {
                 OnRecognized.Invoke("Right:" + resultRight.GestureClass);
+            }
+            else if (resultRight.Score > recognitionThreshold && hoveringOnAbility && gestureFromRightHand)
+            {
+                // Debug.Log("Right Ray Holding Object, Left Ray interacting with");
+                OnRecognized.Invoke("RayHover|Right:" + resultRight.GestureClass);
+
             }
         }
     }
@@ -360,9 +383,14 @@ public class MovementRecognizer : MonoBehaviour
         Result resultLeft = PointCloudRecognizer.Classify(newGestureLeft, trainingSet.ToArray());
         // Debug.Log("Left Hand Result: " + resultLeft.GestureClass + ": " + resultLeft.Score);
 
-        if (resultLeft.Score > recognitionThreshold)
+        if (resultLeft.Score > recognitionThreshold && !hoveringOnAbility)
         {
             OnRecognized.Invoke("Left:" + resultLeft.GestureClass);
+        }
+        else if (resultLeft.Score > recognitionThreshold && hoveringOnAbility && gestureFromLeftHand)
+        {
+            // Debug.Log("Left Ray Holding Object, Right Ray interacting with object");
+            OnRecognized.Invoke("RayHover|Left:" + resultLeft.GestureClass);
         }
 
     }
@@ -380,6 +408,44 @@ public class MovementRecognizer : MonoBehaviour
                 Destroy(Instantiate(debugCubePrefab, movementSourceLeft.position, Quaternion.identity), 3);
             }
         }
+    }
+
+    public void OnRayHoverEnter()
+    {
+        // Debug.Log("Hovered ENTER");
+
+        //ray positions
+        rayInteractorLeft.TryGetHitInfo(out reticlePositionLeft, out reticleNormalLeft, out _, out isValidTargetLeft);
+        rayInteractorRight.TryGetHitInfo(out reticlePositionRight, out reticleNormalRight, out _, out isValidTargetRight);
+        if (isValidTargetRight)
+        {
+            // Debug.Log(rayInteractorRight.gameObject);
+            gestureFromLeftHand = true;
+
+        }
+        if (isValidTargetLeft)
+        {
+            // Debug.Log(rayInteractorLeft.gameObject);
+            gestureFromRightHand = true;
+        }
+
+        hoveringOnAbility = true;
+
+        // Debug.Log("reticlePositionRight" + reticlePositionLeft);
+        // Debug.Log("reticleNormalLeft" + reticleNormalLeft);
+        // Debug.Log("isValidTargetLeft" + isValidTargetLeft);
+    }
+
+    public void OnRayHoverExit()
+    {
+        // Debug.Log("Hovered EXIT");
+        hoveringOnAbility = false;
+
+        isValidTargetRight = false;
+        isValidTargetLeft = false;
+
+        gestureFromLeftHand = false;
+        gestureFromRightHand = false;
     }
 
 }
