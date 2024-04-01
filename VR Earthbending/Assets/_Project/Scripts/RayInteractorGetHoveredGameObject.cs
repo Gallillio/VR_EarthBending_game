@@ -15,6 +15,10 @@ public class RayInteractorGetHoveredGameObject : MonoBehaviour
 
         interactableObject = args.interactableObject.transform.gameObject;
 
+        //send interactableObject to OnGestureAbilities.cs so it can be manipulated
+        FindObjectOfType<OnGestureAbilities>().SetInteractableObject(interactableObject);
+
+
         // interactableObject_rb = interactableObject.GetComponent<Rigidbody>();
         // interactableObject_rb.useGravity = true;
         // interactableObject_rb.velocity = transform.forward * 4;
@@ -23,5 +27,9 @@ public class RayInteractorGetHoveredGameObject : MonoBehaviour
     public void OnHoverExited(HoverExitEventArgs args)
     {
         // Debug.Log($"{args.interactorObject} stopped hovering over {args.interactableObject}", this);
+
+        // interactableObject = null;
+        FindObjectOfType<OnGestureAbilities>().SetInteractableObject(interactableObject);
+
     }
 }

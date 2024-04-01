@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveAbility : MonoBehaviour
 {
     private Rigidbody rb;
-    public float hitPower = 4;
+    [SerializeField] private int hitPower = 20;
 
     private void Start()
     {

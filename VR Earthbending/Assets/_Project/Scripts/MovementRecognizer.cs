@@ -325,7 +325,7 @@ public class MovementRecognizer : MonoBehaviour
             }
             else if (resultRight.Score > recognitionThreshold && hoveringOnAbility && gestureFromRightHand)
             {
-                // Debug.Log("Right Ray Holding Object, Left Ray interacting with");
+                // Debug.Log("Right Ray Holding Object, Left Controller interacting with");
                 OnRecognized.Invoke("RayHover|Right:" + resultRight.GestureClass);
 
             }
@@ -382,6 +382,10 @@ public class MovementRecognizer : MonoBehaviour
         Gesture newGestureLeft = new Gesture(pointArrayLeft);
         Result resultLeft = PointCloudRecognizer.Classify(newGestureLeft, trainingSet.ToArray());
         // Debug.Log("Left Hand Result: " + resultLeft.GestureClass + ": " + resultLeft.Score);
+        // if (resultLeft.Score)
+        // {
+
+        // }
 
         if (resultLeft.Score > recognitionThreshold && !hoveringOnAbility)
         {
@@ -389,7 +393,7 @@ public class MovementRecognizer : MonoBehaviour
         }
         else if (resultLeft.Score > recognitionThreshold && hoveringOnAbility && gestureFromLeftHand)
         {
-            // Debug.Log("Left Ray Holding Object, Right Ray interacting with object");
+            // Debug.Log("Left Ray Holding Object, Right Controller interacting with object");
             OnRecognized.Invoke("RayHover|Left:" + resultLeft.GestureClass);
         }
 

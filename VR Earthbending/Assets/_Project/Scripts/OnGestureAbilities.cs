@@ -25,13 +25,15 @@ public class OnGestureAbilities : MonoBehaviour
     private Vector3 reticlePositionRight;
     private Vector3 reticleNormalRight;
 
-    // public RayInteractorGetHoveredGameObject RayInteractorGetHoveredGameObjectRight;
-    // public RayInteractorGetHoveredGameObject RayInteractorGetHoveredGameObjectLeft;
+    //objects selected to be manipulated (bended) from a far
+    private GameObject interactableObject;
+    private Rigidbody interactableObject_rb;
+    [SerializeField] private GameObject rightDirectController; //use this to get direction of where to move the manipulated object
+    [SerializeField] private GameObject leftDirectController;
+    [SerializeField] private int hitPower = 20;
 
-    private void Update()
-    {
-        // Debug.Log(RayInteractorGetHoveredGameObject.interactableObject);
-    }
+
+
 
     private void DoAbility(string gestureNameAndHand)
     {
@@ -45,7 +47,7 @@ public class OnGestureAbilities : MonoBehaviour
             string handUsed = gestureNameAndHandSplitted[0]; // Get the string before last colon
             string gestureName = gestureNameAndHandSplitted[1]; // Get the string after last colon
 
-
+            ManipulateAbility(gestureName, handUsed);
         }
         //if gesture is made without rayhover interacting with object
         else
@@ -176,6 +178,31 @@ public class OnGestureAbilities : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void ManipulateAbility(string gestureName, string handUsed)
+    {
+        // push selected rock
+        if (gestureName == "horizontal" && interactableObject.name == "rock_1" && handUsed == "Right")
+        {
+            // Debug.Log("I CAN MAKE A ROCK FROM A FAR BRO");
+            interactableObject_rb.useGravity = true;
+            interactableObject_rb.velocity = rightDirectController.transform.forward * hitPower;
+        }
+        else if (gestureName == "horizontal" && interactableObject.name == "rock_1" && handUsed == "Left")
+        {
+            // Debug.Log("I CAN MAKE A ROCK FROM A FAR BRO");
+            interactableObject_rb.useGravity = true;
+            interactableObject_rb.velocity = rightDirectController.transform.forward * hitPower;
+        }
+    }
+
+    public void SetInteractableObject(GameObject interactableObjectReciever)
+    {
+        // Debug.Log(interactableObject);
+
+        interactableObject = interactableObjectReciever;
+        interactableObject_rb = interactableObject.GetComponent<Rigidbody>();
     }
     private string ReplaceWhiteSpaceWithUnderscore(string input)
     {

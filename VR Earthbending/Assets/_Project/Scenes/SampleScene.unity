@@ -5199,6 +5199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d954fdf25297504dab0f1266151b98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableObject: {fileID: 0}
 --- !u!1 &472615218
 GameObject:
   m_ObjectHideFlags: 0
@@ -8721,6 +8722,9 @@ MonoBehaviour:
   player: {fileID: 350677564}
   RayInteractorObjectLeft: {fileID: 2030210874}
   RayInteractorObjectRight: {fileID: 944654879}
+  rightDirectController: {fileID: 2039562355}
+  leftDirectController: {fileID: 2072198329}
+  hitPower: 15
 --- !u!1001 &807051347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11470,7 +11474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4704240698125147210, guid: 048249d9a15aa3c459399751e860bde7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 59.955
       objectReference: {fileID: 0}
     - target: {fileID: 4704240698125147210, guid: 048249d9a15aa3c459399751e860bde7, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -13382,7 +13386,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.07741534
   m_Center: {x: -0.030891497, y: -0.033721536, z: -0.017336143}
@@ -14114,6 +14118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d954fdf25297504dab0f1266151b98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableObject: {fileID: 0}
 --- !u!1001 &1307655359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18727,7 +18732,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 7.9e-43, y: 0, z: 0, w: 4.6967675e+29}
+  m_BoundingSphereOverride: {x: 1.7e-44, y: 0, z: 1.9820213, w: 4.6e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -21920,6 +21925,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &2039562355 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 554942880680482358, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
+  m_PrefabInstance: {fileID: 1825262782}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2043291538
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21956,6 +21966,10 @@ PrefabInstance:
       propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: MovementRecognizer, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 2107747854241868014, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
+      propertyPath: hitPower
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5287663673914361143, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.48
@@ -21966,7 +21980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5287663673914361143, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.45
+      value: -1.49
       objectReference: {fileID: 0}
     - target: {fileID: 5287663673914361143, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22190,6 +22204,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2064529225}
   m_CullTransparentMesh: 0
+--- !u!1 &2072198329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8475227832468170691, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
+  m_PrefabInstance: {fileID: 1825262782}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2078959960
 GameObject:
   m_ObjectHideFlags: 0
