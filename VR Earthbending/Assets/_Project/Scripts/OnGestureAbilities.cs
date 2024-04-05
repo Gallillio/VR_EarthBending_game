@@ -32,20 +32,23 @@ public class OnGestureAbilities : MonoBehaviour
     [SerializeField] private GameObject leftDirectController;
     [SerializeField] private int hitPower = 20;
 
-
-
-
     private void DoAbility(string gestureNameAndHand)
     {
+        // Debug.Log(gestureNameAndHand);
+
         //if gesture is made while rayhover interacting with object
         if (gestureNameAndHand.Contains("RayHover|"))
         {
-            // Debug.Log(gestureNameAndHand);
+            Debug.Log("inside here");
 
             string[] gestureNameAndHandSplitted = gestureNameAndHand.Split(':');
 
-            string handUsed = gestureNameAndHandSplitted[0]; // Get the string before last colon
+            string handUsedWithChecker = gestureNameAndHandSplitted[0]; // Get the string before last colon
             string gestureName = gestureNameAndHandSplitted[1]; // Get the string after last colon
+
+            string[] handUsedWithCheckerSplitted = handUsedWithChecker.Split('|');
+
+            string handUsed = handUsedWithCheckerSplitted[1];
 
             ManipulateAbility(gestureName, handUsed);
         }
@@ -182,16 +185,22 @@ public class OnGestureAbilities : MonoBehaviour
 
     private void ManipulateAbility(string gestureName, string handUsed)
     {
+        // Debug.Log("gestureName: " + gestureName);
+        // Debug.Log("interactableObject name: " + interactableObject.name);
+        // Debug.Log("handUsed: " + handUsed);
+
         // push selected rock
-        if (gestureName == "horizontal" && interactableObject.name == "rock_1" && handUsed == "Right")
+        if (gestureName == "horizontal" && interactableObject.name == "rock_1(Clone)" && handUsed == "Right")
         {
-            // Debug.Log("I CAN MAKE A ROCK FROM A FAR BRO");
+            Debug.Log("I CAN MAKE A ROCK FROM A FAR BRO");
+
             interactableObject_rb.useGravity = true;
             interactableObject_rb.velocity = rightDirectController.transform.forward * hitPower;
         }
-        else if (gestureName == "horizontal" && interactableObject.name == "rock_1" && handUsed == "Left")
+        else if (gestureName == "horizontal" && interactableObject.name == "rock_1(Clone)" && handUsed == "Left")
         {
-            // Debug.Log("I CAN MAKE A ROCK FROM A FAR BRO");
+            Debug.Log("I CAN MAKE A ROCK FROM A FAR BRO");
+
             interactableObject_rb.useGravity = true;
             interactableObject_rb.velocity = rightDirectController.transform.forward * hitPower;
         }
@@ -199,10 +208,10 @@ public class OnGestureAbilities : MonoBehaviour
 
     public void SetInteractableObject(GameObject interactableObjectReciever)
     {
-        // Debug.Log(interactableObject);
-
         interactableObject = interactableObjectReciever;
         interactableObject_rb = interactableObject.GetComponent<Rigidbody>();
+
+        // Debug.Log(interactableObject);
     }
     private string ReplaceWhiteSpaceWithUnderscore(string input)
     {

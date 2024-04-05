@@ -317,7 +317,7 @@ public class MovementRecognizer : MonoBehaviour
         else
         {
             Result resultRight = PointCloudRecognizer.Classify(newGestureRight, trainingSet.ToArray());
-            // Debug.Log("Right Hand Result: " + resultRight.GestureClass + ": " + resultRight.Score);
+            Debug.Log("Right Hand Result: " + resultRight.GestureClass + ": " + resultRight.Score);
 
             if (resultRight.Score > recognitionThreshold && !hoveringOnAbility)
             {
@@ -416,7 +416,7 @@ public class MovementRecognizer : MonoBehaviour
 
     public void OnRayHoverEnter()
     {
-        // Debug.Log("Hovered ENTER");
+        Debug.Log("Hovered ENTER");
 
         //ray positions
         rayInteractorLeft.TryGetHitInfo(out reticlePositionLeft, out reticleNormalLeft, out _, out isValidTargetLeft);
@@ -443,6 +443,7 @@ public class MovementRecognizer : MonoBehaviour
     public void OnRayHoverExit()
     {
         // Debug.Log("Hovered EXIT");
+
         hoveringOnAbility = false;
 
         isValidTargetRight = false;

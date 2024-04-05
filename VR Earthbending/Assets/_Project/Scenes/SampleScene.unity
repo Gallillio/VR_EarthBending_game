@@ -11474,7 +11474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4704240698125147210, guid: 048249d9a15aa3c459399751e860bde7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 59.955
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4704240698125147210, guid: 048249d9a15aa3c459399751e860bde7, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -18732,7 +18732,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.7e-44, y: 0, z: 1.9820213, w: 4.6e-44}
+  m_BoundingSphereOverride: {x: 0, y: 6e-44, z: 4.5e-44, w: 1.7169e-41}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -19075,6 +19075,14 @@ PrefabInstance:
     - target: {fileID: 125596081682679684, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
       propertyPath: m_TagString
       value: PlayerHands
+      objectReference: {fileID: 0}
+    - target: {fileID: 155617298514626094, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 155617298514626094, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
+      propertyPath: m_RayOriginTransform
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 239103479429138164, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
       propertyPath: m_Name
@@ -19505,6 +19513,10 @@ PrefabInstance:
       value: 130.414
       objectReference: {fileID: 0}
     - target: {fileID: 4271511168488432969, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
+      propertyPath: m_GazeTransform
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271511168488432969, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
       propertyPath: m_FacingExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
@@ -19581,6 +19593,10 @@ PrefabInstance:
       value: PlayerHands
       objectReference: {fileID: 0}
     - target: {fileID: 6994137734468225755, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
+      propertyPath: m_GazeTransform
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994137734468225755, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
       propertyPath: m_FacingExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
@@ -19615,6 +19631,10 @@ PrefabInstance:
     - target: {fileID: 7062004111599359807, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7062004111599359807, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
+      propertyPath: m_GazeInteractor
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7179462289238023466, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
       propertyPath: m_RootOrder
@@ -19696,6 +19716,8 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 5038768215742077563, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
     - {fileID: 8096943569256388460, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
+    - {fileID: 9070250349187224019, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
+    - {fileID: 8477793987801566298, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7179462289238023466, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
       insertIndex: 0
@@ -21939,14 +21961,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 276493184545864236, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
-      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 276493184545864236, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
-      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 276493184545864236, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
       propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 545933281}
@@ -21955,21 +21969,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 545933281}
     - target: {fileID: 276493184545864236, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
-      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 545933280}
-    - target: {fileID: 276493184545864236, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
-      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnRayHoverEnter
       objectReference: {fileID: 0}
     - target: {fileID: 276493184545864236, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
-      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MovementRecognizer, Assembly-CSharp
       objectReference: {fileID: 0}
-    - target: {fileID: 2107747854241868014, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
-      propertyPath: hitPower
-      value: 15
+    - target: {fileID: 276493184545864236, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2107747854241868014, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
+      propertyPath: MovementRecognizer
+      value: 
+      objectReference: {fileID: 545933280}
     - target: {fileID: 5287663673914361143, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.48
@@ -22012,7 +22026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5717237626301289215, guid: d320cf0fbd95e9e4ca5855cc018580c5, type: 3}
       propertyPath: m_Name
-      value: rock_1
+      value: rock_1(Clone)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
