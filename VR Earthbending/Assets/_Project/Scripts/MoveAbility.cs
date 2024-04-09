@@ -9,9 +9,9 @@ public class MoveAbility : MonoBehaviour
     [SerializeField] private int hitPower = 20;
 
     // find MovementRecognizer gameObject and save it in this variable
-    public GameObject MovementRecognizer;
+    private GameObject MovementRecognizer;
 
-    public MovementRecognizer movementRecognizerScript;
+    private MovementRecognizer movementRecognizerScript;
 
     XRGrabInteractable grabInteractable;
     private void Start()
