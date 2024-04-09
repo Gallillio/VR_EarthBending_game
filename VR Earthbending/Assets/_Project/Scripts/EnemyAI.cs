@@ -7,6 +7,7 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform player;
+
     // [SerializeField] private LayerMask whatIsGround, whatIsPlayer;
     // [SerializeField] private int health;
 
@@ -105,6 +106,8 @@ public class EnemyAI : MonoBehaviour
     //         Rigidbody rb = Instantiate(rockAttack, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
     //         rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
     //         rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+
+    //         // Destroy(rb.gameObject, 5); //destroy gameobject after 5 seconds
 
 
     //         /// 

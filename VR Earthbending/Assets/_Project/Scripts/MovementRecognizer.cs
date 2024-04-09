@@ -313,11 +313,16 @@ public class MovementRecognizer : MonoBehaviour
         {
             Debug.Log("no Gesture name written you retard");
         }
-        //recognize old training set
+        //recognize already trained set
         else
         {
             Result resultRight = PointCloudRecognizer.Classify(newGestureRight, trainingSet.ToArray());
+
             Debug.Log("Right Hand Result: " + resultRight.GestureClass + ": " + resultRight.Score);
+
+            Debug.Log($"Threshold : {resultRight.Score > recognitionThreshold}");
+            Debug.Log($"hoveringOnAbility : {hoveringOnAbility}");
+            Debug.Log($"gestureFromRightHand : {gestureFromRightHand}");
 
             if (resultRight.Score > recognitionThreshold && !hoveringOnAbility)
             {
@@ -325,7 +330,8 @@ public class MovementRecognizer : MonoBehaviour
             }
             else if (resultRight.Score > recognitionThreshold && hoveringOnAbility && gestureFromRightHand)
             {
-                // Debug.Log("Right Ray Holding Object, Left Controller interacting with");
+                Debug.Log("Using Ray Hover");
+
                 OnRecognized.Invoke("RayHover|Right:" + resultRight.GestureClass);
 
             }
@@ -381,11 +387,9 @@ public class MovementRecognizer : MonoBehaviour
 
         Gesture newGestureLeft = new Gesture(pointArrayLeft);
         Result resultLeft = PointCloudRecognizer.Classify(newGestureLeft, trainingSet.ToArray());
-        // Debug.Log("Left Hand Result: " + resultLeft.GestureClass + ": " + resultLeft.Score);
-        // if (resultLeft.Score)
-        // {
 
-        // }
+        Debug.Log("Left Hand Result: " + resultLeft.GestureClass + ": " + resultLeft.Score);
+
 
         if (resultLeft.Score > recognitionThreshold && !hoveringOnAbility)
         {
@@ -393,7 +397,8 @@ public class MovementRecognizer : MonoBehaviour
         }
         else if (resultLeft.Score > recognitionThreshold && hoveringOnAbility && gestureFromLeftHand)
         {
-            // Debug.Log("Left Ray Holding Object, Right Controller interacting with object");
+            Debug.Log("Using RayHover");
+
             OnRecognized.Invoke("RayHover|Left:" + resultLeft.GestureClass);
         }
 
@@ -416,7 +421,7 @@ public class MovementRecognizer : MonoBehaviour
 
     public void OnRayHoverEnter()
     {
-        Debug.Log("Hovered ENTER");
+        // Debug.Log("Hovered ENTER");
 
         //ray positions
         rayInteractorLeft.TryGetHitInfo(out reticlePositionLeft, out reticleNormalLeft, out _, out isValidTargetLeft);
@@ -435,7 +440,7 @@ public class MovementRecognizer : MonoBehaviour
 
         hoveringOnAbility = true;
 
-        // Debug.Log("reticlePositionRight" + reticlePositionLeft);
+        // Debug.Log("reticlePositionLeft" + reticlePositionLeft);
         // Debug.Log("reticleNormalLeft" + reticleNormalLeft);
         // Debug.Log("isValidTargetLeft" + isValidTargetLeft);
     }

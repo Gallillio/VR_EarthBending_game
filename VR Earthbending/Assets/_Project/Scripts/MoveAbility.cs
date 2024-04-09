@@ -8,29 +8,45 @@ public class MoveAbility : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private int hitPower = 20;
 
-    // public GameObject MovementRecognizer;
-    // XRGrabInteractable grabInteractable;
+    // find MovementRecognizer gameObject and save it in this variable
+    public GameObject MovementRecognizer;
+
+    public MovementRecognizer movementRecognizerScript;
+
+    XRGrabInteractable grabInteractable;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        // grabInteractable = GetComponent<XRGrabInteractable>();
+        grabInteractable = GetComponent<XRGrabInteractable>();
+
+        MovementRecognizer = GameObject.Find("Movement Recognizer");
+        movementRecognizerScript = MovementRecognizer.GetComponent<MovementRecognizer>();
     }
 
     private void Update()
     {
-        // grabInteractable.hoverEntered.AddListener(x => MovementRecognizer.GetComponent<MovementRecognizer>().OnRayHoverEnter());
-        // grabInteractable.hoverExited.AddListener(x => MovementRecognizer.GetComponent<MovementRecognizer>().OnRayHoverExit());
+        HoverEnterAndExit();
     }
 
+    //when punching the ability from close
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("PlayerHands"))
         {
             // Debug.Log("AAAA HIT");
+
             rb.useGravity = true;
             rb.velocity = other.transform.forward * hitPower;
 
             Destroy(gameObject, 4f);
         }
     }
+
+    //when bending the ability from far using ray
+    private void HoverEnterAndExit()
+    {
+        grabInteractable.hoverEntered.AddListener(x => movementRecognizerScript.OnRayHoverEnter());
+        grabInteractable.hoverExited.AddListener(x => movementRecognizerScript.OnRayHoverExit());
+    }
+
 }

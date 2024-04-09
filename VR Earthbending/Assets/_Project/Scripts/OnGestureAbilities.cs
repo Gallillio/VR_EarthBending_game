@@ -39,7 +39,6 @@ public class OnGestureAbilities : MonoBehaviour
         //if gesture is made while rayhover interacting with object
         if (gestureNameAndHand.Contains("RayHover|"))
         {
-            Debug.Log("inside here");
 
             string[] gestureNameAndHandSplitted = gestureNameAndHand.Split(':');
 
@@ -192,7 +191,7 @@ public class OnGestureAbilities : MonoBehaviour
         // push selected rock
         if (gestureName == "horizontal" && interactableObject.name == "rock_1(Clone)" && handUsed == "Right")
         {
-            Debug.Log("I CAN MAKE A ROCK FROM A FAR BRO");
+            // Debug.Log("I CAN MAKE A ROCK FROM A FAR BRO");
 
             interactableObject_rb.useGravity = true;
             interactableObject_rb.velocity = rightDirectController.transform.forward * hitPower;
