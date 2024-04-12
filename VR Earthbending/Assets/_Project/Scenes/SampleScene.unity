@@ -25401,7 +25401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 348485317996016573, guid: 6af903601f5d5a341b54882cb516bddf, type: 3}
       propertyPath: damangeDelt
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6852916181057788709, guid: 6af903601f5d5a341b54882cb516bddf, type: 3}
       propertyPath: m_Name
