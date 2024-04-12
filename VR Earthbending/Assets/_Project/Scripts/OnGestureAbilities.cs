@@ -32,9 +32,14 @@ public class OnGestureAbilities : MonoBehaviour
     [SerializeField] private GameObject leftDirectController;
     [SerializeField] private int hitPower = 20;
 
+    private void Update()
+    {
+
+    }
+
     private void DoAbility(string gestureNameAndHand)
     {
-        // Debug.Log(gestureNameAndHand);
+        Debug.Log(gestureNameAndHand);
 
         //if gesture is made while rayhover interacting with object
         if (gestureNameAndHand.Contains("RayHover|"))
@@ -132,6 +137,8 @@ public class OnGestureAbilities : MonoBehaviour
         //ray positions
         rayInteractorLeft.TryGetHitInfo(out reticlePositionLeft, out reticleNormalLeft, out _, out _);
         rayInteractorRight.TryGetHitInfo(out reticlePositionRight, out reticleNormalRight, out _, out _);
+
+        Debug.Log(reticlePositionRight);
 
         //ray reticle position with y position changed
         reticlePositionRight.y = 1f;

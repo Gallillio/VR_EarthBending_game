@@ -234,6 +234,8 @@ public class MovementRecognizer : MonoBehaviour
         Result resultRight = PointCloudRecognizer.Classify(newGestureRight, trainingSet.ToArray());
         Result resultLeft = PointCloudRecognizer.Classify(newGestureLeft, trainingSet.ToArray());
 
+        Debug.Log("Right Hand Result: " + resultRight.GestureClass + ": " + resultRight.Score + " | Left Hand Result: " + resultLeft.GestureClass + ": " + resultLeft.Score);
+
         if (resultLeft.Score > recognitionThreshold && resultRight.Score > recognitionThreshold)
         {
             OnRecognized.Invoke("Both|Left:" + resultLeft.GestureClass + "|Right:" + resultRight.GestureClass);
@@ -320,9 +322,9 @@ public class MovementRecognizer : MonoBehaviour
 
             Debug.Log("Right Hand Result: " + resultRight.GestureClass + ": " + resultRight.Score);
 
-            Debug.Log($"Threshold : {resultRight.Score > recognitionThreshold}");
-            Debug.Log($"hoveringOnAbility : {hoveringOnAbility}");
-            Debug.Log($"gestureFromRightHand : {gestureFromRightHand}");
+            // Debug.Log($"Threshold : {resultRight.Score > recognitionThreshold}");
+            // Debug.Log($"hoveringOnAbility : {hoveringOnAbility}");
+            // Debug.Log($"gestureFromRightHand : {gestureFromRightHand}");
 
             if (resultRight.Score > recognitionThreshold && !hoveringOnAbility)
             {
