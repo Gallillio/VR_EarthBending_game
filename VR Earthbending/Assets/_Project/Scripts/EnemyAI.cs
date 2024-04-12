@@ -55,7 +55,7 @@ public class EnemyAI : MonoBehaviour
     }
 
     /// Enemy Health and Take Damange
-    private void TakeDamange(float damangeAmount)
+    public void TakeDamange(int damangeAmount)
     {
         currentHealth -= damangeAmount;
         if (currentHealth <= 0)

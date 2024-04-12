@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 849576571542279148}
   - component: {fileID: 7578593459820412755}
   - component: {fileID: 7226391549238798661}
+  - component: {fileID: 348485317996016573}
   m_Layer: 0
   m_Name: rock_1
   m_TagString: Untagged
@@ -302,5 +303,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPower: 15
-  MovementRecognizer: {fileID: 0}
-  movementRecognizerScript: {fileID: 0}
+--- !u!114 &348485317996016573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6852916181057788709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be9d4aca75b01146ba1ef9d43665d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

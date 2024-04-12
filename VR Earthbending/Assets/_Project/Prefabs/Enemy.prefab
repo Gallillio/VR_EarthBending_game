@@ -1995,7 +1995,7 @@ GameObject:
   - component: {fileID: 8401216466096387357}
   m_Layer: 6
   m_Name: Enemy
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2124,6 +2124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxTime: 1
   minDistance: 1
+  maxHealth: 0
+  currentHealth: 0
 --- !u!1 &6492583740836070826
 GameObject:
   m_ObjectHideFlags: 0
