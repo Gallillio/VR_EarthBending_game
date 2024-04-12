@@ -11,16 +11,25 @@ public class EnemyAI : MonoBehaviour
     private Animator animator;
 
     //follow player efficiently without updating every frame
+    [Header("Player Following Agent")]
     [SerializeField] private float maxTime = 1f;
     [SerializeField] private float minDistance = 1f;
     private float timer = 0f;
 
-    private void Awake()
+    //enemy health
+    [Header("Health")]
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float currentHealth;
+    EnemyRagdoll enemyRagdoll;
+
+    private void Start()
     {
         player = GameObject.Find("Main Camera").transform;
         agent = GetComponent<NavMeshAgent>();
 
         animator = GetComponent<Animator>();
+        currentHealth = maxHealth;
+        enemyRagdoll = GetComponent<EnemyRagdoll>();
     }
 
     private void Update()
@@ -36,5 +45,26 @@ public class EnemyAI : MonoBehaviour
             timer = maxTime;
         }
         animator.SetFloat("Speed", agent.velocity.magnitude);
+
+
+        if (currentHealth <= 0)
+        {
+            // Debug.Log("deadd");
+            EnemyDie();
+        }
+    }
+
+    /// Enemy Health and Take Damange
+    private void TakeDamange(float damangeAmount)
+    {
+        currentHealth -= damangeAmount;
+        if (currentHealth <= 0)
+        {
+            EnemyDie();
+        }
+    }
+    private void EnemyDie()
+    {
+        enemyRagdoll.ActivateRagdoll();
     }
 }
