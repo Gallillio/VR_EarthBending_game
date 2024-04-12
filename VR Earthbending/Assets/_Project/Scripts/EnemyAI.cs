@@ -37,7 +37,7 @@ public class EnemyAI : MonoBehaviour
     private void Update()
     {
         timer -= Time.deltaTime;
-        if (timer < 0f && currentHealth <= 0)
+        if (timer < 0f && currentHealth > 0)
         {
             float sqDistance = (player.transform.position - agent.destination).sqrMagnitude;
             if (sqDistance > minDistance * minDistance)
