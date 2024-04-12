@@ -21,6 +21,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;
     EnemyRagdoll enemyRagdoll;
+    UIHealthBar healthBarUI;
 
     private void Start()
     {
@@ -30,12 +31,13 @@ public class EnemyAI : MonoBehaviour
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
         enemyRagdoll = GetComponent<EnemyRagdoll>();
+        healthBarUI = GameObject.Find("UIHealthBar").GetComponent<UIHealthBar>();
     }
 
     private void Update()
     {
         timer -= Time.deltaTime;
-        if (timer < 0f)
+        if (timer < 0f && currentHealth <= 0)
         {
             float sqDistance = (player.transform.position - agent.destination).sqrMagnitude;
             if (sqDistance > minDistance * minDistance)
@@ -58,6 +60,13 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamange(int damangeAmount)
     {
         currentHealth -= damangeAmount;
+
+        // Debug.Log("currentHealth: " + currentHealth);
+        // Debug.Log("maxHealth: " + maxHealth);
+        // Debug.Log("input percentage: " + currentHealth / maxHealth);
+
+        healthBarUI.SetHealthBarPercentage(currentHealth / maxHealth);
+
         if (currentHealth <= 0)
         {
             EnemyDie();
@@ -66,5 +75,7 @@ public class EnemyAI : MonoBehaviour
     private void EnemyDie()
     {
         enemyRagdoll.ActivateRagdoll();
+
+        healthBarUI.gameObject.SetActive(false);
     }
 }

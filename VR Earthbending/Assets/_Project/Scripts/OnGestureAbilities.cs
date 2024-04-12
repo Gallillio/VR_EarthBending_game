@@ -13,7 +13,7 @@ public class OnGestureAbilities : MonoBehaviour
     [SerializeField] private List<GameObject> oneHandGesturesList;
     [SerializeField] private List<GameObject> twoHandGesturesList;
 
-    [SerializeField] private Transform player;
+    private Transform player;
 
     //ray interactor
     [SerializeField] private XRRayInteractor RayInteractorObjectLeft;
@@ -32,9 +32,14 @@ public class OnGestureAbilities : MonoBehaviour
     [SerializeField] private GameObject leftDirectController;
     [SerializeField] private int hitPower = 20;
 
-    private void Update()
+    private void Start()
     {
+        player = GameObject.Find("Main Camera").transform;
 
+        // RayInteractorObjectLeft = GameObject.Find("Downwards Ray Interactor Left").GetComponent<XRRayInteractor>();
+        // RayInteractorObjectRight = GameObject.Find("Downwards Ray Interactor Right").GetComponent<XRRayInteractor>();
+        // rightDirectController = GameObject.Find("Direct Interactor Right");
+        // leftDirectController = GameObject.Find("Direct Interactor Left");
     }
 
     private void DoAbility(string gestureNameAndHand)
@@ -137,8 +142,6 @@ public class OnGestureAbilities : MonoBehaviour
         //ray positions
         rayInteractorLeft.TryGetHitInfo(out reticlePositionLeft, out reticleNormalLeft, out _, out _);
         rayInteractorRight.TryGetHitInfo(out reticlePositionRight, out reticleNormalRight, out _, out _);
-
-        Debug.Log(reticlePositionRight);
 
         //ray reticle position with y position changed
         reticlePositionRight.y = 1f;

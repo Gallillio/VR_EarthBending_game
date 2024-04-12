@@ -73,6 +73,11 @@ public class MovementRecognizer : MonoBehaviour
     private bool gestureFromRightHand = false;
     void Start()
     {
+        //set variables
+        // movementSourceLeft = GameObject.Find("Left Controller").transform;
+        // movementSourceRight = GameObject.Find("Right Controller").transform;
+
+        //create gesture file directory
         string[] gestureFiles = Directory.GetFiles(Application.persistentDataPath, "*.xml");
         foreach (var item in gestureFiles)
         {
