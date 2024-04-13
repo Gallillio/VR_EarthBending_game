@@ -12,11 +12,22 @@ public class GiveDamage : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            // Debug.Log("AAAA IT GAVE DAMANGE");
+            //when enemy is still alive
             enemyAIscript = other.GetComponent<EnemyAI>();
+            if (enemyAIscript != null)
+            {
+                enemyAIscript.TakeDamange(damangeDelt, gameObject.transform.forward);
+                Destroy(gameObject);
+            }
+            //when enemy is dead and need to be in ragdoll state
+            else
+            {
+                enemyAIscript = other.transform.parent.parent.gameObject.GetComponent<EnemyAI>();
 
-            enemyAIscript.TakeDamange(damangeDelt);
-            Destroy(gameObject);
+                enemyAIscript.TakeDamange(damangeDelt, gameObject.transform.forward);
+                Destroy(gameObject);
+            }
+
 
         }
     }

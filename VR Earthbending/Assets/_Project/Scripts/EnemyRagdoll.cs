@@ -5,13 +5,13 @@ using UnityEngine;
 public class EnemyRagdoll : MonoBehaviour
 {
     Rigidbody[] rigidBodies; //rigid bodies of all children
-    CapsuleCollider[] colliders; //capsule colliders of all children
+    // CapsuleCollider[] colliders; //capsule colliders of all children
     Animator animator;
 
     void Start()
     {
         rigidBodies = GetComponentsInChildren<Rigidbody>();
-        colliders = GetComponentsInChildren<CapsuleCollider>();
+        // colliders = GetComponentsInChildren<CapsuleCollider>();
 
         animator = GetComponent<Animator>();
         DeactivateRagdoll();
@@ -23,10 +23,10 @@ public class EnemyRagdoll : MonoBehaviour
         {
             rigidBody.isKinematic = true;
         }
-        foreach (var collider in colliders)
-        {
-            collider.isTrigger = true;
-        }
+        // foreach (var collider in colliders)
+        // {
+        //     collider.isTrigger = true;
+        // }
 
         animator.enabled = true;
     }
@@ -37,11 +37,18 @@ public class EnemyRagdoll : MonoBehaviour
         {
             rigidBody.isKinematic = false;
         }
-        foreach (var collider in colliders)
-        {
-            collider.isTrigger = false;
-        }
+        // foreach (var collider in colliders)
+        // {
+        //     collider.isTrigger = false;
+        // }
 
         animator.enabled = false;
+    }
+
+    public void ApplyForce(Vector3 force)
+    {
+        var rigitBody = animator.GetBoneTransform(HumanBodyBones.Hips).GetComponent<Rigidbody>();
+        // Debug.Log(force);
+        rigitBody.AddForce(force, ForceMode.VelocityChange);
     }
 }

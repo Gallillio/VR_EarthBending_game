@@ -23,15 +23,24 @@ public class EnemyAI : MonoBehaviour
     EnemyRagdoll enemyRagdoll;
     UIHealthBar healthBarUI;
 
+    //ragdoll state
+    private BoxCollider hitDetectorBoxCollider;
+    [SerializeField] private float dieForce;
+    private CapsuleCollider ragdollCapsuleCollider; // this capsule turns on when entering ragdoll state, used to get pushed by abilities when in ragdoll state
+
     private void Start()
     {
         player = GameObject.Find("Main Camera").transform;
         agent = GetComponent<NavMeshAgent>();
+        hitDetectorBoxCollider = GetComponent<BoxCollider>();
+        hitDetectorBoxCollider.enabled = true;
 
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
         enemyRagdoll = GetComponent<EnemyRagdoll>();
         healthBarUI = GameObject.Find("UIHealthBar").GetComponent<UIHealthBar>();
+
+        ragdollCapsuleCollider = gameObject.transform.GetChild(1).GetChild(0).gameObject.GetComponent<CapsuleCollider>();
     }
 
     private void Update()
@@ -47,17 +56,10 @@ public class EnemyAI : MonoBehaviour
             timer = maxTime;
         }
         animator.SetFloat("Speed", agent.velocity.magnitude);
-
-
-        if (currentHealth <= 0)
-        {
-            // Debug.Log("deadd");
-            EnemyDie();
-        }
     }
 
     /// Enemy Health and Take Damange
-    public void TakeDamange(int damangeAmount)
+    public void TakeDamange(int damangeAmount, Vector3 hitDirection)
     {
         currentHealth -= damangeAmount;
 
@@ -69,13 +71,23 @@ public class EnemyAI : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            EnemyDie();
+            EnemyDie(hitDirection);
         }
     }
-    private void EnemyDie()
+    private void EnemyDie(Vector3 hitDirection)
     {
         enemyRagdoll.ActivateRagdoll();
 
         healthBarUI.gameObject.SetActive(false);
+
+        //disable player from being able to hit big collider
+        hitDetectorBoxCollider.enabled = false;
+
+        //apply force on ragdoll when hit
+        hitDirection.y = 1;
+        enemyRagdoll.ApplyForce(hitDirection * dieForce);
+
+        //turn on ragdoll capsule colldier to get pushed by abilities
+        ragdollCapsuleCollider.enabled = true;
     }
 }

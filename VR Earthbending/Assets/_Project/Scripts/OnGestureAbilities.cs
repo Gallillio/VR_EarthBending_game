@@ -14,6 +14,7 @@ public class OnGestureAbilities : MonoBehaviour
     [SerializeField] private List<GameObject> twoHandGesturesList;
 
     private Transform player;
+    [SerializeField] private float spawnPositionY = 0.5f;
 
     //ray interactor
     [SerializeField] private XRRayInteractor RayInteractorObjectLeft;
@@ -44,7 +45,7 @@ public class OnGestureAbilities : MonoBehaviour
 
     private void DoAbility(string gestureNameAndHand)
     {
-        Debug.Log(gestureNameAndHand);
+        // Debug.Log(gestureNameAndHand);
 
         //if gesture is made while rayhover interacting with object
         if (gestureNameAndHand.Contains("RayHover|"))
@@ -144,8 +145,8 @@ public class OnGestureAbilities : MonoBehaviour
         rayInteractorRight.TryGetHitInfo(out reticlePositionRight, out reticleNormalRight, out _, out _);
 
         //ray reticle position with y position changed
-        reticlePositionRight.y = 1f;
-        reticlePositionLeft.y = 1f;
+        reticlePositionRight.y = spawnPositionY;
+        reticlePositionLeft.y = spawnPositionY;
 
         // Wall Ability
         if (leftGesture == "vertical" && rightGesture == "vertical")
