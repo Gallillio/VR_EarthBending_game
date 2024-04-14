@@ -209,7 +209,7 @@ public class OnGestureAbilities : MonoBehaviour
         }
         else if (gestureName == "horizontal" && interactableObject.name == "rock_1(Clone)" && handUsed == "Left")
         {
-            Debug.Log("I CAN MAKE A ROCK FROM A FAR BRO");
+            // Debug.Log("I CAN MAKE A ROCK FROM A FAR BRO");
 
             interactableObject_rb.useGravity = true;
             interactableObject_rb.velocity = rightDirectController.transform.forward * hitPower;
