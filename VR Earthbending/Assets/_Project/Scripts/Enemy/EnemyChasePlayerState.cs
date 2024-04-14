@@ -7,6 +7,8 @@ public class EnemyChasePlayerState : EnemyState
     public Transform player;
     private float timer = 0f;
 
+    public WeaponIK weaponIK;
+
     public EnemyStateID GetID()
     {
         return EnemyStateID.ChasePlayer;
@@ -14,8 +16,9 @@ public class EnemyChasePlayerState : EnemyState
 
     public void Enter(EnemyAgent agent)
     {
-        // player = GameObject.Find("Main Camera").transform;
-        Debug.Log("EnemyChasePlayer ENTER is working");
+        // Debug.Log("EnemyChasePlayer ENTER is working");
+
+
     }
 
     public void Exit(EnemyAgent agent)
@@ -24,7 +27,7 @@ public class EnemyChasePlayerState : EnemyState
 
     public void Update(EnemyAgent agent)
     {
-
+        //chasing player
         timer -= Time.deltaTime;
         if (timer < 0f)
         {
@@ -35,6 +38,9 @@ public class EnemyChasePlayerState : EnemyState
             }
             timer = agent.config.maxTime;
         }
+
+        //attacking player
+        agent.weaponIK.SetTargetTransform(agent.player);
     }
 
 

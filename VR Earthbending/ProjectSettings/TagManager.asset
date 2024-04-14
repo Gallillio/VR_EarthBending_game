@@ -6,7 +6,6 @@ TagManager:
   tags:
   - PlayerHands
   - Anchor
-  - CinemachineTarget
   - Enemy
   layers:
   - Default

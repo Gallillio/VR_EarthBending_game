@@ -9,16 +9,16 @@ public class EnemyAgent : MonoBehaviour
     public EnemyStateID initialState;
     public EnemyAgentConfig config;
 
-    public Transform player;
+    [HideInInspector] public Transform player;
     //chase player state variables
-    public NavMeshAgent navMeshAgent;
+    [HideInInspector] public NavMeshAgent navMeshAgent;
 
     //dead state variables
-    public EnemyRagdoll enemyRagdoll;
-    public UIHealthBar healthBarUI;
-    public BoxCollider hitDetectorBoxCollider;
-    public CapsuleCollider ragdollCapsuleCollider; // this capsule turns on when entering ragdoll state, used to get pushed by abilities when in ragdoll state
-
+    [HideInInspector] public EnemyRagdoll enemyRagdoll;
+    [HideInInspector] public UIHealthBar healthBarUI;
+    [HideInInspector] public BoxCollider hitDetectorBoxCollider;
+    [HideInInspector] public CapsuleCollider ragdollCapsuleCollider; // this capsule turns on when entering ragdoll state, used to get pushed by abilities when in ragdoll state
+    public WeaponIK weaponIK;
 
 
     void Start()
@@ -35,6 +35,7 @@ public class EnemyAgent : MonoBehaviour
         }
         hitDetectorBoxCollider = GetComponent<BoxCollider>();
         ragdollCapsuleCollider = gameObject.transform.GetChild(1).GetChild(0).gameObject.GetComponent<CapsuleCollider>();
+        weaponIK = GetComponent<WeaponIK>();
 
         stateMachine = new EnemyStateMachine(this);
 
