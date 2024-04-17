@@ -27,7 +27,7 @@ public class EnemyChasePlayerState : EnemyState
 
     public void Update(EnemyAgent agent)
     {
-        //chasing player
+        ///// Chase Player \\\\\
         timer -= Time.deltaTime;
         if (timer < 0f)
         {
@@ -39,8 +39,12 @@ public class EnemyChasePlayerState : EnemyState
             timer = agent.config.maxTime;
         }
 
-        //attacking player
+        ///// Attacking Player \\\\\
+        // look at player
         agent.weaponIK.SetTargetTransform(agent.player);
+
+        // spawn rock
+        agent.weaponIK.AttackPlayerStartCoroutine();
     }
 
 

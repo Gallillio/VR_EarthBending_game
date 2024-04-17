@@ -18,7 +18,7 @@ public class EnemyAgent : MonoBehaviour
     [HideInInspector] public UIHealthBar healthBarUI;
     [HideInInspector] public BoxCollider hitDetectorBoxCollider;
     [HideInInspector] public CapsuleCollider ragdollCapsuleCollider; // this capsule turns on when entering ragdoll state, used to get pushed by abilities when in ragdoll state
-    public WeaponIK weaponIK;
+    [HideInInspector] public WeaponIK weaponIK;
 
 
     void Start()

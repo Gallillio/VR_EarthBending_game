@@ -5,7 +5,13 @@ using UnityEngine;
 
 public class WeaponIK : MonoBehaviour
 {
-    public Transform targetTransform;
+    [SerializeField] private GameObject rockAttack;
+    [SerializeField] private Transform rockAttackSpawnPosition;
+    MoveAbility moveAbilityScript; // Use this script to get variable: hitPower. So I can use the same set variable
+    private bool canFireRock = true;
+    private float waitSecondsToFire = 3;
+
+    [HideInInspector] public Transform targetTransform;
     public Transform aimTransform; // spine of enemy for now 
     private Transform bone; //spine of enemy body
 
@@ -75,5 +81,38 @@ public class WeaponIK : MonoBehaviour
     public void SetAimTransform(Transform aim)
     {
         aimTransform = aim;
+    }
+
+    IEnumerator AttackPlayerIEnumerator()
+    {
+        canFireRock = false;
+        //create rock
+        GameObject instantiatedRockAttackObject = Instantiate(rockAttack, rockAttackSpawnPosition.position, transform.rotation, gameObject.transform);
+        // spawns rock but doesnt push it
+        Rigidbody instantiatedRockAttackObject_rb = instantiatedRockAttackObject.GetComponent<Rigidbody>();
+        moveAbilityScript = instantiatedRockAttackObject.GetComponent<MoveAbility>();
+        //push rock after few secods
+        // instantiatedRockAttackObject_rb.velocity = transform.forward * moveAbilityScript.hitPower;
+        StartCoroutine(PushRockAfterSeconds(instantiatedRockAttackObject_rb));
+
+        //destroy rock if not hit
+        Destroy(instantiatedRockAttackObject, 5f);
+
+        yield return new WaitForSeconds(waitSecondsToFire);
+        canFireRock = true;
+    }
+    IEnumerator PushRockAfterSeconds(Rigidbody instantiatedRockAttackObject_rb)
+    {
+        yield return new WaitForSeconds(waitSecondsToFire - 1);
+        instantiatedRockAttackObject_rb.velocity = transform.forward * moveAbilityScript.hitPower;
+    }
+
+
+    public void AttackPlayerStartCoroutine()
+    {
+        if (canFireRock)
+        {
+            StartCoroutine(AttackPlayerIEnumerator());
+        }
     }
 }

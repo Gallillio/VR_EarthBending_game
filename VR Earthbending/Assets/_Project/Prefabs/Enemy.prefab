@@ -2667,7 +2667,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.000000037252903, y: 0.28508067, z: 0.00000043446198}
+  m_ConnectedAnchor: {x: -0.000000052154064, y: 0.28508085, z: 0.00000041676685}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -3170,6 +3170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7232644350718046862}
+  - component: {fileID: 1757694885478314230}
   m_Layer: 0
   m_Name: Spine
   m_TagString: Untagged
@@ -3193,6 +3194,18 @@ Transform:
   - {fileID: 4106824136181549016}
   m_Father: {fileID: 7631594291928069409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1757694885478314230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440262607858573347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a27567c140fba844a9e8af68816add0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7527502917423781186
 GameObject:
   m_ObjectHideFlags: 0
@@ -3243,6 +3256,8 @@ GameObject:
   - component: {fileID: 6161409732741343798}
   - component: {fileID: 8572352848553949319}
   - component: {fileID: 7146591185309750129}
+  - component: {fileID: 5013328052934882784}
+  - component: {fileID: 7166090414942766270}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -3328,7 +3343,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.42, y: 1.6301979, z: 0.280972}
   m_Center: {x: 1.6615364e-15, y: 0.93454367, z: 0.02149269}
@@ -3344,7 +3359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6d519bad44ca94a8fafd531e39df82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 11
   currentHealth: 0
 --- !u!114 &7146591185309750129
 MonoBehaviour:
@@ -3358,6 +3373,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae62a9aba937fb4a8f4ca4b3a1f96a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5013328052934882784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7560390984618766092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e11163928860c1945ab701bad2e7b2b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialState: 2
+  config: {fileID: 11400000, guid: 972a86ec768ef014491884c80f379de0, type: 2}
+  player: {fileID: 0}
+  navMeshAgent: {fileID: 0}
+  enemyRagdoll: {fileID: 0}
+  healthBarUI: {fileID: 0}
+  hitDetectorBoxCollider: {fileID: 0}
+  ragdollCapsuleCollider: {fileID: 0}
+  weaponIK: {fileID: 0}
+--- !u!114 &7166090414942766270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7560390984618766092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a4f3171ff2caa1449e7ef3414b3982d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rockAttack: {fileID: 6852916181057788709, guid: 6af903601f5d5a341b54882cb516bddf, type: 3}
+  targetTransform: {fileID: 0}
+  aimTransform: {fileID: 7232644350718046862}
+  angleLimit: 90
+  distanceLimit: 1.5
 --- !u!1 &7601688607646882833
 GameObject:
   m_ObjectHideFlags: 0

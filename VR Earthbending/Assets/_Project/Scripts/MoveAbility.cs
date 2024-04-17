@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class MoveAbility : MonoBehaviour
 {
     private Rigidbody rb;
-    [SerializeField] private int hitPower = 20;
+    public int hitPower = 20;
 
     // find MovementRecognizer gameObject and save it in this variable
     private GameObject MovementRecognizer;
