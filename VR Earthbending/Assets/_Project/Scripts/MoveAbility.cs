@@ -5,6 +5,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class MoveAbility : MonoBehaviour
 {
+    public bool playerCanMoveAbility = true; //this checks if the ability is used by player or enemy, if enemy is using it then we dont want player to interact with it unless doing so on purpose
+
     private Rigidbody rb;
     public int hitPower = 20;
 
@@ -16,6 +18,8 @@ public class MoveAbility : MonoBehaviour
     XRGrabInteractable grabInteractable;
     private void Start()
     {
+        // playerCanMoveAbility = true;
+
         rb = GetComponent<Rigidbody>();
         grabInteractable = GetComponent<XRGrabInteractable>();
 
@@ -31,11 +35,11 @@ public class MoveAbility : MonoBehaviour
     //when punching the ability from close
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("PlayerHands"))
+        if (other.gameObject.CompareTag("PlayerHands") && playerCanMoveAbility)
         {
             // Debug.Log("AAAA HIT");
 
-            rb.useGravity = true;
+            // rb.useGravity = true;
             rb.velocity = other.transform.forward * hitPower;
 
             Destroy(gameObject, 4f);

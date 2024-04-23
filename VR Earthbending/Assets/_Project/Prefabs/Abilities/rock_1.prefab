@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd0e336c4f0e0441a8de4fd2e8eb7da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCanMoveAbility: 1
   hitPower: 15
 --- !u!114 &348485317996016573
 MonoBehaviour:

@@ -9,7 +9,7 @@ public class WeaponIK : MonoBehaviour
     [SerializeField] private Transform rockAttackSpawnPosition;
     MoveAbility moveAbilityScript; // Use this script to get variable: hitPower. So I can use the same set variable
     private bool canFireRock = true;
-    private float waitSecondsToFire = 3;
+    private float waitSecondsToSpawn = 2;
 
     [HideInInspector] public Transform targetTransform;
     public Transform aimTransform; // spine of enemy for now 
@@ -90,21 +90,31 @@ public class WeaponIK : MonoBehaviour
         GameObject instantiatedRockAttackObject = Instantiate(rockAttack, rockAttackSpawnPosition.position, transform.rotation, gameObject.transform);
         // spawns rock but doesnt push it
         Rigidbody instantiatedRockAttackObject_rb = instantiatedRockAttackObject.GetComponent<Rigidbody>();
-        moveAbilityScript = instantiatedRockAttackObject.GetComponent<MoveAbility>();
+        MoveAbility moveAbilityScript = instantiatedRockAttackObject.GetComponent<MoveAbility>();
+
+        //make player hand collider not interact with rock
+        moveAbilityScript.playerCanMoveAbility = false;
+
         //push rock after few secods
         // instantiatedRockAttackObject_rb.velocity = transform.forward * moveAbilityScript.hitPower;
-        StartCoroutine(PushRockAfterSeconds(instantiatedRockAttackObject_rb));
+        StartCoroutine(PushRockAfterSeconds(instantiatedRockAttackObject_rb, moveAbilityScript));
 
         //destroy rock if not hit
         Destroy(instantiatedRockAttackObject, 5f);
 
-        yield return new WaitForSeconds(waitSecondsToFire);
+        //spawn rock one at a time
+        yield return new WaitForSeconds(waitSecondsToSpawn);
         canFireRock = true;
     }
-    IEnumerator PushRockAfterSeconds(Rigidbody instantiatedRockAttackObject_rb)
+    IEnumerator PushRockAfterSeconds(Rigidbody instantiatedRockAttackObject_rb, MoveAbility moveAbilityScript)
     {
-        yield return new WaitForSeconds(waitSecondsToFire - 1);
-        instantiatedRockAttackObject_rb.velocity = transform.forward * moveAbilityScript.hitPower;
+        yield return new WaitForSeconds(waitSecondsToSpawn - 1);
+        //if it isnt destroyed yet
+        if (instantiatedRockAttackObject_rb != null)
+        {
+            instantiatedRockAttackObject_rb.velocity = transform.forward * moveAbilityScript.hitPower;
+
+        }
     }
 
 

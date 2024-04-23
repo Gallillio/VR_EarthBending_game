@@ -1262,11 +1262,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 143237140}
   m_CullTransparentMesh: 1
---- !u!4 &149275489 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6517977047825430499, guid: 0db618405e076b24497c55693d8d6045, type: 3}
-  m_PrefabInstance: {fileID: 6361178934986044972}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &151510397
 GameObject:
   m_ObjectHideFlags: 0
@@ -18959,7 +18954,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.22576694
   m_Height: 1.8374076
@@ -20045,7 +20040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8189171602916567492, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8475227832468170691, guid: 65eb6b98091a5734ba9d9ca871cef69a, type: 3}
       propertyPath: m_Name
@@ -20819,37 +20814,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949060115}
   m_CullTransparentMesh: 1
---- !u!1 &1952648121
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1952648122}
-  m_Layer: 0
-  m_Name: RockAttackSpawnPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1952648122
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1952648121}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.01, z: 1.06}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 149275489}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1961494665
 GameObject:
   m_ObjectHideFlags: 0
@@ -25094,24 +25058,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7166090414942766270, guid: 0db618405e076b24497c55693d8d6045, type: 3}
-      propertyPath: rockAttackSpawnPosition
-      value: 
-      objectReference: {fileID: 1952648122}
-    - target: {fileID: 7166090414942766270, guid: 0db618405e076b24497c55693d8d6045, type: 3}
-      propertyPath: rockSpawnPositionOffset.x
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7560390984618766092, guid: 0db618405e076b24497c55693d8d6045, type: 3}
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6517977047825430499, guid: 0db618405e076b24497c55693d8d6045, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1952648122}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0db618405e076b24497c55693d8d6045, type: 3}
 --- !u!23 &7718390322663337749
@@ -25174,7 +25127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 137474366455674836, guid: 6af903601f5d5a341b54882cb516bddf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.59
+      value: 5.14
       objectReference: {fileID: 0}
     - target: {fileID: 137474366455674836, guid: 6af903601f5d5a341b54882cb516bddf, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25207,6 +25160,10 @@ PrefabInstance:
     - target: {fileID: 6852916181057788709, guid: 6af903601f5d5a341b54882cb516bddf, type: 3}
       propertyPath: m_Name
       value: rock_1(Clone)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226391549238798661, guid: 6af903601f5d5a341b54882cb516bddf, type: 3}
+      propertyPath: playerCanMoveAbility
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
