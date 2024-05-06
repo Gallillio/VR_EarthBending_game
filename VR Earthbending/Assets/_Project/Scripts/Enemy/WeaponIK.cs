@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +11,7 @@ public class WeaponIK : MonoBehaviour
     private float waitSecondsToSpawn = 2;
 
     [HideInInspector] public Transform targetTransform;
-    public Transform aimTransform; // spine of enemy for now 
+    public Transform aimTransform; // inside spine of enemy, is the parent of the instantiated rock so it can move with it 
     private Transform bone; //spine of enemy body
 
     //stop bone from rotating if too close or at too much angle
@@ -87,7 +86,7 @@ public class WeaponIK : MonoBehaviour
     {
         canFireRock = false;
         //create rock
-        GameObject instantiatedRockAttackObject = Instantiate(rockAttack, rockAttackSpawnPosition.position, transform.rotation, gameObject.transform);
+        GameObject instantiatedRockAttackObject = Instantiate(rockAttack, rockAttackSpawnPosition.position, transform.rotation, aimTransform);
         // spawns rock but doesnt push it
         Rigidbody instantiatedRockAttackObject_rb = instantiatedRockAttackObject.GetComponent<Rigidbody>();
         MoveAbility moveAbilityScript = instantiatedRockAttackObject.GetComponent<MoveAbility>();
@@ -109,11 +108,11 @@ public class WeaponIK : MonoBehaviour
     IEnumerator PushRockAfterSeconds(Rigidbody instantiatedRockAttackObject_rb, MoveAbility moveAbilityScript)
     {
         yield return new WaitForSeconds(waitSecondsToSpawn - 1);
+
         //if it isnt destroyed yet
         if (instantiatedRockAttackObject_rb != null)
         {
-            instantiatedRockAttackObject_rb.velocity = transform.forward * moveAbilityScript.hitPower;
-
+            instantiatedRockAttackObject_rb.velocity = aimTransform.forward * moveAbilityScript.hitPower;
         }
     }
 
