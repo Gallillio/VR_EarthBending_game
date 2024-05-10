@@ -5,6 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class MoveAbility : MonoBehaviour
 {
+    public bool enemyAttackIsInteractable = false;
     public bool playerCanMoveAbility = true; //this checks if the ability is used by player or enemy, if enemy is using it then we dont want player to interact with it unless doing so on purpose
 
     private Rigidbody rb;

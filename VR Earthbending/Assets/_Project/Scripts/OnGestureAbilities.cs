@@ -36,11 +36,6 @@ public class OnGestureAbilities : MonoBehaviour
     private void Start()
     {
         player = GameObject.Find("Main Camera").transform;
-
-        // RayInteractorObjectLeft = GameObject.Find("Downwards Ray Interactor Left").GetComponent<XRRayInteractor>();
-        // RayInteractorObjectRight = GameObject.Find("Downwards Ray Interactor Right").GetComponent<XRRayInteractor>();
-        // rightDirectController = GameObject.Find("Direct Interactor Right");
-        // leftDirectController = GameObject.Find("Direct Interactor Left");
     }
 
     private void DoAbility(string gestureNameAndHand)
@@ -101,8 +96,8 @@ public class OnGestureAbilities : MonoBehaviour
                 leftGesture = ReplaceWhiteSpaceWithUnderscore(leftGesture);
                 rightGesture = ReplaceWhiteSpaceWithUnderscore(rightGesture);
 
-                // Debug.Log("leftGesture: " + leftGesture);
-                // Debug.Log("rightGesture: " + rightGesture);
+                Debug.Log("leftGesture: " + leftGesture);
+                Debug.Log("rightGesture: " + rightGesture);
 
                 //generate ability
                 GenerateAbility(leftGesture: leftGesture, rightGesture: rightGesture);
@@ -176,7 +171,7 @@ public class OnGestureAbilities : MonoBehaviour
                 }
             }
         }
-        if (rightGesture == "vertical" && leftGesture == null)
+        if (leftGesture == null && rightGesture == "vertical")
         {
             foreach (var ability in oneHandGesturesList)
             {
@@ -188,6 +183,16 @@ public class OnGestureAbilities : MonoBehaviour
                     Instantiate(ability, reticlePositionRight, abilityRotation);
                 }
             }
+        }
+
+        // Control enemy rock
+        if (leftGesture == "circle" && rightGesture == null)
+        {
+            Debug.Log("can move enemy rock");
+        }
+        if (leftGesture == null && rightGesture == "circle")
+        {
+            Debug.Log("can move enemy rock");
         }
     }
 
