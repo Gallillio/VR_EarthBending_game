@@ -87,7 +87,7 @@ public class WeaponIK : MonoBehaviour
     {
         canFireRock = false;
         //create rock
-        GameObject instantiatedRockAttackObject = Instantiate(rockAttack, rockAttackSpawnPosition.position, transform.rotation, gameObject.transform);
+        GameObject instantiatedRockAttackObject = Instantiate(rockAttack, rockAttackSpawnPosition.position, transform.rotation, aimTransform);
         // spawns rock but doesnt push it
         Rigidbody instantiatedRockAttackObject_rb = instantiatedRockAttackObject.GetComponent<Rigidbody>();
         MoveAbility moveAbilityScript = instantiatedRockAttackObject.GetComponent<MoveAbility>();
