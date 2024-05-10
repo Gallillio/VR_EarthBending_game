@@ -337,7 +337,7 @@ public class MovementRecognizer : MonoBehaviour
             }
             else if (resultRight.Score > recognitionThreshold && hoveringOnAbility && gestureFromRightHand)
             {
-                Debug.Log("Using Ray Hover");
+                Debug.Log("Using Ray Hover Right");
 
                 OnRecognized.Invoke("RayHover|Right:" + resultRight.GestureClass);
 
@@ -404,7 +404,7 @@ public class MovementRecognizer : MonoBehaviour
         }
         else if (resultLeft.Score > recognitionThreshold && hoveringOnAbility && gestureFromLeftHand)
         {
-            Debug.Log("Using RayHover");
+            Debug.Log("Using RayHover Left");
 
             OnRecognized.Invoke("RayHover|Left:" + resultLeft.GestureClass);
         }

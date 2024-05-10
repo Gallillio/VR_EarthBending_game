@@ -112,8 +112,8 @@ public class WeaponIK : MonoBehaviour
         //if it isnt destroyed yet
         if (instantiatedRockAttackObject_rb != null)
         {
-            instantiatedRockAttackObject_rb.velocity = transform.forward * moveAbilityScript.hitPower;
-
+            // instantiatedRockAttackObject_rb.velocity = transform.forward * moveAbilityScript.hitPower;
+            instantiatedRockAttackObject_rb.velocity = aimTransform.forward * moveAbilityScript.hitPower;
         }
     }
 

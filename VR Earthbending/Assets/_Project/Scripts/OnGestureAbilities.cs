@@ -45,7 +45,6 @@ public class OnGestureAbilities : MonoBehaviour
 
     private void DoAbility(string gestureNameAndHand)
     {
-        // Debug.Log(gestureNameAndHand);
 
         //if gesture is made while rayhover interacting with object
         if (gestureNameAndHand.Contains("RayHover|"))
@@ -132,7 +131,6 @@ public class OnGestureAbilities : MonoBehaviour
                 }
             }
         }
-
     }
 
     private void GenerateAbility(string leftGesture, string rightGesture)
