@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyRagdoll : MonoBehaviour
 {
     Rigidbody[] rigidBodies; //rigid bodies of all children
-    // CapsuleCollider[] colliders; //capsule colliders of all children
     Animator animator;
+
+    private WeaponIK weaponIKScript;
 
     void Start()
     {
+        weaponIKScript = GetComponent<WeaponIK>();
+
         rigidBodies = GetComponentsInChildren<Rigidbody>();
-        // colliders = GetComponentsInChildren<CapsuleCollider>();
 
         animator = GetComponent<Animator>();
         DeactivateRagdoll();
@@ -23,10 +26,6 @@ public class EnemyRagdoll : MonoBehaviour
         {
             rigidBody.isKinematic = true;
         }
-        // foreach (var collider in colliders)
-        // {
-        //     collider.isTrigger = true;
-        // }
 
         animator.enabled = true;
     }
@@ -37,18 +36,16 @@ public class EnemyRagdoll : MonoBehaviour
         {
             rigidBody.isKinematic = false;
         }
-        // foreach (var collider in colliders)
-        // {
-        //     collider.isTrigger = false;
-        // }
 
         animator.enabled = false;
+
+        //deactivate bone aim at player
+        weaponIKScript.aimTransform = null;
     }
 
     public void ApplyForce(Vector3 force)
     {
         var rigitBody = animator.GetBoneTransform(HumanBodyBones.Hips).GetComponent<Rigidbody>();
-        // Debug.Log(force);
         rigitBody.AddForce(force, ForceMode.VelocityChange);
     }
 }
